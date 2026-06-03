@@ -1,0 +1,118 @@
+export const portfolio = {
+  name: "Amarjeet Kumar",
+  role: "Software Developer",
+  location: "Noida, Uttar Pradesh, India",
+  email: "amarjeet.official.work@gmail.com",
+  phone: "+91 8920843853",
+  image: "/amarjeet_profile.png",
+  resume: "https://drive.google.com/file/d/1kNv9CI2mFfjPhyPWIXSxQLo6sINz8TjX/view?usp=drivesdk",
+  headline:
+    "Building AI-powered backend systems, automation platforms, and full-stack products.",
+  intro:
+    "I design scalable services with Node.js, Python, REST APIs, WebSockets, LangChain, RAG, and modern databases. My work sits where business workflows, real-time systems, and practical AI meet.",
+  socials: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/amarjeet-kumar-638782208/" },
+    { label: "GitHub", href: "https://github.com/Amarjeetkumar123" },
+    { label: "LeetCode", href: "https://leetcode.com/u/amarjeet_kumar0987/" },
+  ],
+  metrics: [
+    { value: "70%", label: "support calls automated" },
+    { value: "35%", label: "AI accuracy improvement" },
+    { value: "10K+", label: "automations processed daily" },
+    { value: "1000+", label: "active users supported" },
+  ],
+  focusAreas: [
+    "Real-time AI calling",
+    "Backend architecture",
+    "Automation workflows",
+    "Full-stack product delivery",
+  ],
+  experience: [
+    {
+      company: "Profunnel Technologies Pvt. Ltd.",
+      role: "Software Developer (MTS-II)",
+      period: "Jul 2025 - Present",
+      location: "Remote, Noida",
+      points: [
+        "Built real-time AI calling services in Node.js across telephony, STT, and TTS providers with multilingual support.",
+        "Developed an instruction-driven AI agent framework using Python, LangChain, RAG, and vector databases.",
+        "Mentored junior developers, improving onboarding speed and reducing review cycles.",
+      ],
+    },
+    {
+      company: "Athmin Technologies Pvt. Ltd.",
+      role: "Software Developer (MTS-I)",
+      period: "May 2023 - Jul 2025",
+      location: "Remote, Noida",
+      points: [
+        "Enhanced CRM and agile project management products serving 1000+ active users.",
+        "Implemented lead scoring, task automation, sales workflows, subscription billing, and payment automation.",
+        "Collaborated across product, design, and engineering to debug cross-stack issues and maintain platform quality.",
+      ],
+    },
+  ],
+  skills: {
+    Frontend: ["React.js", "Redux", "TypeScript", "JavaScript", "Tailwind CSS"],
+    Backend: ["Node.js", "Express.js", "REST APIs", "WebSockets", "JWT"],
+    AI: ["Python", "LangChain", "RAG", "Vector Databases", "LLM Agents"],
+    Databases: ["MongoDB", "MySQL", "Redis", "PostgreSQL"],
+    Tools: ["Docker", "Git", "CI/CD", "AWS", "Swagger", "Jest"],
+  },
+  projects: [
+    {
+      name: "Pronnel AI-Powered Business Solutions Platform",
+      type: "Production Platform",
+      description:
+        "Backend and AI features across CRM, Teams, automation, and AI calling modules with scalable APIs and payment workflows.",
+      stack: ["Node.js", "Python", "MongoDB", "PostgreSQL", "REST APIs"],
+      highlights: [
+        "AI calling modules with real-time speech workflows",
+        "Lead management and task automation APIs",
+        "Razorpay and Pabbly subscription billing integration",
+      ],
+      live: "https://pronnel.com/",
+      code: "#",
+    },
+    {
+      name: "Netflix Clone",
+      type: "Full-Stack Streaming Platform",
+      description:
+        "A responsive streaming app with authentication, email verification, trailer playback, search, and TMDB-powered content.",
+      stack: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+      highlights: [
+        "JWT auth and email verification",
+        "10,000+ movies and TV shows via TMDB",
+        "Responsive UI with trailer playback",
+      ],
+      live: "https://netflix-clone-frontend-woad.vercel.app/",
+      code: "https://github.com/Amarjeetkumar123/Netflix-Clone-NodeJs-ReactJs",
+    },
+    {
+      name: "Booklet",
+      type: "Bookstore E-Commerce Platform",
+      description:
+        "A MERN commerce platform with product discovery, cart, secure checkout, order management, and admin controls.",
+      stack: ["MongoDB", "Express.js", "React.js", "Node.js", "Tailwind CSS"],
+      highlights: [
+        "Search, filtering, ratings, wishlist, and cart",
+        "JWT auth with role-based access",
+        "Admin dashboard for products, users, and orders",
+      ],
+      live: "http://72.62.72.185:3000/",
+      code: "https://github.com/Amarjeetkumar123/Booklet---a-book-store",
+    },
+  ],
+  award: {
+    title: "Architect of Intelligence Award",
+    issuer: "Pronnel",
+    certificate: "https://drive.google.com/file/d/1IGn2Xs1luddpRwkZ56FGEJ3zyAWD3S-n/view?usp=sharing",
+    description:
+      "Recognized for blending backend reliability with innovative AI calling solutions.",
+  },
+  education: {
+    school: "Ramanujan College, University of Delhi",
+    degree: "B.Voc in Software Development",
+    period: "2020 - 2023",
+    score: "CGPA: 8.0",
+  },
+};
