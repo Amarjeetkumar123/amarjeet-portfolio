@@ -141,9 +141,19 @@ function ProfileVisual() {
 }
 
 function LogoMark({ label }: { label: string }) {
+  const isImage = label.startsWith("/");
+
   return (
-    <div className="grid size-14 shrink-0 place-items-center rounded-2xl border border-cyan-400/45 bg-white/75 font-mono text-sm font-bold text-cyan-700 shadow-neon dark:bg-white/10 dark:text-neon-cyan">
-      {label}
+    <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white p-2 shadow-sm dark:border-white/15 dark:bg-white">
+      {isImage ? (
+        <img
+          src={label}
+          alt="logo"
+          className="max-h-full max-w-full object-contain"
+        />
+      ) : (
+        <span className="font-mono text-sm font-bold text-cyan-700">{label}</span>
+      )}
     </div>
   );
 }
