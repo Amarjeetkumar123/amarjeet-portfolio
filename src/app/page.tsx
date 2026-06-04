@@ -3,25 +3,34 @@
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
-  Award,
+  BadgeCheck,
   BriefcaseBusiness,
   Code2,
+  Cpu,
+  Database,
   Eye,
   ExternalLink,
-  Link,
+  GraduationCap,
   Mail,
+  Menu,
   MapPin,
   Moon,
   Phone,
+  Server,
   Sparkles,
   Sun,
   Terminal,
+  Trophy,
+  X,
 } from "lucide-react";
+import { FaAws, FaDocker, FaGitAlt, FaGithub, FaLinkedinIn, FaNodeJs, FaPython, FaReact } from "react-icons/fa";
+import { SiLeetcode, SiMongodb, SiPostgresql, SiTypescript } from "react-icons/si";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { HoverCard } from "@/components/hover-card";
 import { portfolio } from "@/data/portfolio";
 
-const nav = ["About", "Experience", "Projects", "Certifications", "Skills", "Contact"];
+const nav = ["About", "Experience", "Projects", "Skills", "Certifications", "Contact"];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -132,9 +141,100 @@ function ProfileVisual() {
   );
 }
 
+function LogoMark({ label }: { label: string }) {
+  const isImage = label.startsWith("/");
+
+  const iconMap: Record<string, { icon: React.ReactNode; className: string }> = {
+    FE: {
+      icon: <FaReact size={28} />,
+      className: "text-[#61DAFB]",
+    },
+    BE: {
+      icon: <FaNodeJs size={28} />,
+      className: "text-[#539E43]",
+    },
+    AI: {
+      icon: <FaPython size={28} />,
+      className: "text-[#3776AB]",
+    },
+    DB: {
+      icon: <SiPostgresql size={28} />,
+      className: "text-[#336791]",
+    },
+    DO: {
+      icon: <FaDocker size={28} />,
+      className: "text-[#2496ED]",
+    },
+  };
+
+  return (
+    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/15 dark:bg-white/95">
+      {isImage ? (
+        <img
+          src={label}
+          alt="logo"
+          className="max-h-10 max-w-10 object-contain"
+        />
+      ) : iconMap[label] ? (
+        <span className={iconMap[label].className}>{iconMap[label].icon}</span>
+      ) : (
+        <span className="font-mono text-sm font-bold text-cyan-700">{label}</span>
+      )}
+    </div>
+  );
+}
+
+function SkillIcon({ group }: { group: string }) {
+  const className = "text-cyan-600 dark:text-neon-cyan";
+
+  if (group.includes("Backend")) return <Server className={className} size={22} />;
+  if (group.includes("Database")) return <Database className={className} size={22} />;
+  if (group.includes("AI")) return <Cpu className={className} size={22} />;
+
+  return <Code2 className={className} size={22} />;
+}
+
+function SocialIcon({ label, className = "", size = 18 }: { label: string; className?: string; size?: number }) {
+  if (label === "LinkedIn") {
+    return <FaLinkedinIn className={className} size={size} />;
+  }
+
+  if (label === "GitHub") {
+    return <FaGithub className={className} size={size} />;
+  }
+
+  if (label === "LeetCode") {
+    return <SiLeetcode className={className} size={size} />;
+  }
+
+  return <ExternalLink className={className} size={size} />;
+}
+
+function StickySocials() {
+  return (
+    <aside className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
+      {portfolio.socials.map((social) => (
+        <a
+          key={social.label}
+          href={social.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={social.label}
+          className="grid size-11 place-items-center rounded-full border border-cyan-400/45 bg-white/75 text-cyan-700 shadow-neon backdrop-blur transition hover:-translate-y-1 hover:bg-cyan-400/10 dark:bg-ink/70 dark:text-neon-cyan"
+        >
+          <SocialIcon label={social.label} size={22} />
+        </a>
+      ))}
+    </aside>
+  );
+}
+
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <main className="overflow-hidden">
+      <StickySocials />
       <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-900/10 bg-white/62 backdrop-blur-xl dark:border-white/10 dark:bg-ink/62">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
           <a href="#top" className="flex items-center gap-3 font-semibold">
@@ -161,11 +261,43 @@ export default function Home() {
               View Resume
             </a>
             <ThemeToggle />
+            <button
+              aria-label="Open menu"
+              onClick={() => setMenuOpen((open) => !open)}
+              className="grid size-10 place-items-center rounded-full border border-slate-300/70 bg-white/70 text-slate-900 shadow-sm transition hover:border-cyan-400 hover:text-cyan-600 dark:border-white/15 dark:bg-white/10 dark:text-white md:hidden"
+            >
+              {menuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
         </nav>
+        {menuOpen ? (
+          <div className="border-t border-cyan-400/20 bg-white/90 px-5 py-4 shadow-neon backdrop-blur-xl dark:bg-ink/95 md:hidden">
+            <div className="mx-auto grid max-w-7xl gap-2">
+              {nav.map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-cyan-400/10 hover:text-cyan-700 dark:text-slate-200 dark:hover:text-neon-cyan"
+                >
+                  {item}
+                </a>
+              ))}
+              <a
+                href={portfolio.resume}
+                target={portfolio.resume.startsWith("http") ? "_blank" : undefined}
+                rel={portfolio.resume.startsWith("http") ? "noreferrer" : undefined}
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full border border-cyan-400/60 px-4 py-3 text-sm font-semibold text-cyan-700 dark:text-neon-cyan"
+              >
+                <Eye size={16} />
+                View Resume
+              </a>
+            </div>
+          </div>
+        ) : null}
       </header>
 
-      <section id="top" className="relative mx-auto grid min-h-screen w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-28 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:px-10">
+      <section id="top" className="relative mx-auto grid min-h-[92vh] w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-28 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:px-10">
         <motion.div initial="hidden" animate="show" variants={fadeUp} transition={{ duration: 0.65 }}>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-cyan-700 dark:text-neon-cyan">
             <Sparkles size={15} />
@@ -180,6 +312,16 @@ export default function Home() {
           <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300 sm:text-lg">
             {portfolio.intro}
           </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {portfolio.focusAreas.map((area) => (
+              <span
+                key={area}
+                className="rounded-full border border-cyan-400/45 bg-white/65 px-3 py-1.5 text-sm font-medium text-cyan-800 shadow-sm dark:bg-white/10 dark:text-neon-cyan"
+              >
+                {area}
+              </span>
+            ))}
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href="#projects"
@@ -214,23 +356,17 @@ export default function Home() {
       <section id="about" className="mx-auto w-full max-w-7xl px-5 pb-8 sm:px-8 lg:px-10">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {portfolio.metrics.map((metric, index) => (
-            <motion.div
-              key={metric.label}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="neon-panel rounded-2xl p-5"
-            >
+            <HoverCard key={metric.label} delay={index * 0.06} className="rounded-2xl p-5">
               <p className="text-3xl font-semibold text-cyan-600 dark:text-neon-cyan">{metric.value}</p>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{metric.label}</p>
-            </motion.div>
+            </HoverCard>
           ))}
         </div>
       </section>
+      <div className="neon-divider mx-auto max-w-6xl" />
 
       <Section id="experience" eyebrow="Work Signal" title="Production experience across AI, automation, CRM, and backend platforms.">
-        <div className="relative space-y-5 before:absolute before:left-4 before:top-4 before:h-[calc(100%-2rem)] before:w-px before:bg-cyan-400/35">
+        <div className="relative space-y-5 before:absolute before:left-4 before:top-4 before:h-[calc(100%-2rem)] before:w-px before:bg-gradient-to-b before:from-cyan-400 before:via-neon-lime before:to-cyan-400 before:shadow-neon">
           {portfolio.experience.map((job, index) => (
             <motion.article
               key={job.company}
@@ -239,13 +375,17 @@ export default function Home() {
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="neon-panel relative ml-10 rounded-2xl p-6"
+              whileHover={{ y: -5, scale: 1.005 }}
+              className="neon-panel hover-card relative ml-10 rounded-2xl p-6"
             >
-              <span className="absolute -left-[2.85rem] top-7 grid size-8 place-items-center rounded-full border border-cyan-400 bg-ink text-neon-cyan shadow-neon">
-                <BriefcaseBusiness size={15} />
+              <span className="absolute -left-[3.1rem] top-6 grid size-10 place-items-center rounded-full border border-cyan-400 bg-ink text-neon-cyan shadow-neon ring-4 ring-cyan-400/10">
+                <BriefcaseBusiness size={17} />
               </span>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
+                  <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-cyan-700 dark:text-neon-cyan">
+                    Experience
+                  </p>
                   <h3 className="text-xl font-semibold">{job.role}</h3>
                   <p className="mt-1 text-cyan-700 dark:text-neon-cyan">{job.company}</p>
                 </div>
@@ -269,15 +409,7 @@ export default function Home() {
       <Section id="projects" eyebrow="Featured Builds" title="Projects written around outcomes, ownership, and system thinking.">
         <div className="grid gap-5 lg:grid-cols-3">
           {portfolio.projects.map((project, index) => (
-            <motion.article
-              key={project.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-90px" }}
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
-              className="neon-panel flex min-h-[430px] flex-col rounded-2xl p-6"
-            >
+            <HoverCard key={project.name} delay={index * 0.08} className="flex min-h-[430px] flex-col rounded-2xl p-6">
               <div className="mb-6 flex items-center justify-between gap-3">
                 <span className="rounded-full border border-pink-400/40 bg-pink-400/10 px-3 py-1 font-mono text-xs text-pink-600 dark:text-neon-pink">
                   {project.type}
@@ -285,6 +417,9 @@ export default function Home() {
                 <Terminal className="text-cyan-500 dark:text-neon-cyan" size={21} />
               </div>
               <h3 className="text-2xl font-semibold">{project.name}</h3>
+              <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-cyan-700 dark:text-neon-cyan">
+                Outcome-focused build
+              </p>
               <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">{project.description}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {project.stack.map((item) => (
@@ -302,95 +437,94 @@ export default function Home() {
                 ))}
               </ul>
               <div className="mt-auto flex gap-3 pt-6">
-                <a href={project.live} className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-700 dark:text-neon-cyan">
+                <a
+                  href={project.live}
+                  target={project.live.startsWith("http") ? "_blank" : undefined}
+                  rel={project.live.startsWith("http") ? "noreferrer" : undefined}
+                  className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-neon transition hover:-translate-y-0.5 dark:bg-neon-cyan dark:text-ink"
+                >
                   Live <ArrowUpRight size={15} />
                 </a>
-                <a href={project.code} className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-300">
+                <a
+                  href={project.code}
+                  target={project.code.startsWith("http") ? "_blank" : undefined}
+                  rel={project.code.startsWith("http") ? "noreferrer" : undefined}
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-cyan-400 dark:border-white/15 dark:text-slate-300"
+                >
                   Code <Code2 size={15} />
                 </a>
               </div>
-            </motion.article>
+            </HoverCard>
           ))}
         </div>
       </Section>
 
       <Section id="skills" eyebrow="Tech Stack" title="A practical stack for backend-heavy products and AI-enabled workflows.">
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {Object.entries(portfolio.skills).map(([group, skills], index) => (
-            <motion.div
-              key={group}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.05 }}
-              className="neon-panel rounded-2xl p-6"
-            >
-              <h3 className="text-lg font-semibold text-cyan-700 dark:text-neon-cyan">{group}</h3>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {skills.map((skill) => (
-                  <span key={skill} className="rounded-full border border-slate-300/70 px-3 py-1.5 text-sm text-slate-700 dark:border-white/15 dark:text-slate-200">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </Section>
-
-      <Section id="certifications" eyebrow="Verified Skills" title="Certifications and proof of knowledge from trusted providers.">
-        <div className="grid gap-5 lg:grid-cols-2">
-          {portfolio.certifications.map((certification, index) => (
-            <motion.article
-              key={certification.title}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="neon-panel rounded-2xl p-6"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{certification.issuer}</p>
-                  <h3 className="mt-3 text-xl font-semibold">{certification.title}</h3>
+        <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
+          <HoverCard className="rounded-2xl p-6">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-cyan-700 dark:text-neon-cyan">
+              Core strengths
+            </p>
+            <div className="mt-5 grid gap-3">
+              {portfolio.focusAreas.map((area) => (
+                <div key={area} className="flex items-center gap-3 rounded-2xl border border-cyan-400/25 bg-white/55 p-4 dark:bg-white/10">
+                  <BadgeCheck className="shrink-0 text-cyan-600 dark:text-neon-cyan" size={19} />
+                  <span className="text-sm font-semibold text-slate-800 dark:text-slate-100">{area}</span>
                 </div>
-                <p className="rounded-full border border-slate-300/70 px-3 py-1 text-xs font-medium text-slate-600 dark:border-white/15 dark:text-slate-300">
-                  {certification.date}
-                </p>
+              ))}
+              <div className="rounded-2xl border border-lime-400/40 bg-lime-300/10 p-4">
+                <p className="text-3xl font-semibold text-cyan-700 dark:text-neon-cyan">1000+</p>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">DSA problems solved across platforms</p>
               </div>
-              <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
-                Verified certification evidence available via Google Drive.
-              </p>
-              {certification.certificate ? (
-                <a
-                  href={certification.certificate}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/60 px-4 py-2 text-sm font-semibold text-cyan-700 transition hover:bg-cyan-400/10 dark:text-neon-cyan"
-                >
-                  <Eye size={16} />
-                  View Certificate
-                </a>
-              ) : null}
-            </motion.article>
-          ))}
+            </div>
+          </HoverCard>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {portfolio.skills.map((skillGroup, index) => (
+              <HoverCard key={skillGroup.group} delay={index * 0.05} className="rounded-2xl p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <LogoMark label={skillGroup.logo} />
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-950 dark:text-white">{skillGroup.group}</h3>
+                      <p className="mt-1 font-mono text-xs uppercase tracking-[0.18em] text-cyan-700 dark:text-neon-cyan">
+                        {skillGroup.level}
+                      </p>
+                    </div>
+                  </div>
+                  <SkillIcon group={skillGroup.group} />
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {skillGroup.items.map((skill) => (
+                    <span key={skill} className="rounded-full border border-slate-300/70 bg-white/50 px-3 py-1.5 text-sm text-slate-700 dark:border-white/15 dark:bg-white/10 dark:text-slate-200">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </HoverCard>
+            ))}
+          </div>
         </div>
       </Section>
 
-      <Section id="contact" eyebrow="Next Step" title="Let’s build reliable products with smart automation and clean engineering.">
-        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="neon-panel rounded-2xl p-6">
-            <div className="flex items-start gap-4">
-              <div className="grid size-12 shrink-0 place-items-center rounded-full bg-cyan-400/10 text-cyan-600 dark:text-neon-cyan">
-                <Award />
-              </div>
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Award</p>
-                <h3 className="mt-2 text-2xl font-semibold">{portfolio.award.title}</h3>
-                <p className="mt-2 text-cyan-700 dark:text-neon-cyan">{portfolio.award.issuer}</p>
+      <Section id="certifications" eyebrow="Proof of Capability" title="Recognition, credentials, and verified skill signals.">
+        <div className="space-y-5">
+          <HoverCard className="relative rounded-2xl p-6">
+            <div className="absolute right-5 top-5 text-cyan-500/20 dark:text-neon-cyan/20">
+              <Trophy size={90} />
+            </div>
+            <div className="relative flex flex-col gap-4 sm:flex-row sm:items-start">
+              <LogoMark label={portfolio.award.logo} />
+              <div className="max-w-4xl">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-cyan-700 dark:text-neon-cyan">Featured Award</p>
+                <h3 className="mt-3 text-2xl font-semibold">{portfolio.award.title}</h3>
+                <p className="mt-2 text-sm font-semibold text-slate-700 dark:text-slate-200">{portfolio.award.issuer}</p>
+                <p className="mt-1 text-sm text-cyan-700 dark:text-neon-cyan">{portfolio.award.area}</p>
                 <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">{portfolio.award.description}</p>
+                <div className="mt-4 rounded-2xl border border-lime-400/35 bg-lime-300/10 p-4">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-lime-700 dark:text-neon-lime">Impact</p>
+                  <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-200">{portfolio.award.impact}</p>
+                </div>
                 {portfolio.award.certificate && portfolio.award.certificate !== "#" ? (
                   <a
                     href={portfolio.award.certificate}
@@ -404,9 +538,65 @@ export default function Home() {
                 ) : null}
               </div>
             </div>
-          </motion.div>
+          </HoverCard>
 
-          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} transition={{ delay: 0.08 }} className="neon-panel rounded-2xl p-6">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {portfolio.certifications.map((certification, index) => (
+              <HoverCard key={certification.title} delay={index * 0.06} className="rounded-2xl p-5">
+                <div className="flex items-start gap-4">
+                  <LogoMark label={certification.logo} />
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-700 dark:text-neon-cyan">{certification.type}</p>
+                    <h3 className="mt-2 text-lg font-semibold">{certification.title}</h3>
+                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{certification.issuer}</p>
+                  </div>
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-slate-300/70 px-3 py-1 text-xs font-medium text-slate-600 dark:border-white/15 dark:text-slate-300">{certification.date}</span>
+                  <span className="rounded-full border border-cyan-400/35 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-700 dark:text-neon-cyan">{certification.area}</span>
+                </div>
+                {certification.certificate ? (
+                  <a
+                    href={certification.certificate}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/60 px-4 py-2 text-sm font-semibold text-cyan-700 transition hover:bg-cyan-400/10 dark:text-neon-cyan"
+                  >
+                    <Eye size={16} />
+                    View Certificate
+                  </a>
+                ) : null}
+              </HoverCard>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section id="contact" eyebrow="Next Step" title="Let’s build reliable products with smart automation and clean engineering.">
+        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <HoverCard className="rounded-2xl p-6">
+            <div className="flex items-start gap-4">
+              <div className="grid size-12 shrink-0 place-items-center rounded-full bg-cyan-400/10 text-cyan-600 dark:text-neon-cyan">
+                <GraduationCap />
+              </div>
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Education</p>
+                <h3 className="mt-2 text-2xl font-semibold">{portfolio.education.degree}</h3>
+                <p className="mt-2 text-cyan-700 dark:text-neon-cyan">{portfolio.education.school}</p>
+                <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                  {portfolio.education.period} · {portfolio.education.score}
+                </p>
+                <div className="mt-5 rounded-2xl border border-cyan-400/30 bg-cyan-400/10 p-4">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-700 dark:text-neon-cyan">Currently building</p>
+                  <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-200">
+                    Real-time AI calling systems, automation workflows, and scalable backend services.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </HoverCard>
+
+          <HoverCard delay={0.08} className="rounded-2xl p-6">
             <h3 className="text-2xl font-semibold">Contact</h3>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
               <a href={`mailto:${portfolio.email}`} className="flex items-center gap-3 rounded-2xl border border-slate-300/70 p-4 transition hover:border-cyan-400 dark:border-white/15">
@@ -425,12 +615,12 @@ export default function Home() {
                   rel="noreferrer"
                   className="flex items-center gap-3 rounded-2xl border border-slate-300/70 p-4 transition hover:border-cyan-400 dark:border-white/15"
                 >
-                  {social.label === "LinkedIn" ? <Link className="text-cyan-600 dark:text-neon-cyan" size={19} /> : <ExternalLink className="text-cyan-600 dark:text-neon-cyan" size={19} />}
+                  <SocialIcon label={social.label} className="text-cyan-600 dark:text-neon-cyan" size={22} />
                   <span className="text-sm">{social.label}</span>
                 </a>
               ))}
             </div>
-          </motion.div>
+          </HoverCard>
         </div>
       </Section>
     </main>
