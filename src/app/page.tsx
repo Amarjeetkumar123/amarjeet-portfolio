@@ -508,14 +508,14 @@ export default function Home() {
       </Section>
 
       <Section id="certifications" eyebrow="Proof of Capability" title="Recognition, credentials, and verified skill signals.">
-        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="space-y-5">
           <HoverCard className="relative rounded-2xl p-6">
             <div className="absolute right-5 top-5 text-cyan-500/20 dark:text-neon-cyan/20">
               <Trophy size={90} />
             </div>
-            <div className="relative flex items-start gap-4">
+            <div className="relative flex flex-col gap-4 sm:flex-row sm:items-start">
               <LogoMark label={portfolio.award.logo} />
-              <div>
+              <div className="max-w-4xl">
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-cyan-700 dark:text-neon-cyan">Featured Award</p>
                 <h3 className="mt-3 text-2xl font-semibold">{portfolio.award.title}</h3>
                 <p className="mt-2 text-sm font-semibold text-slate-700 dark:text-slate-200">{portfolio.award.issuer}</p>
@@ -540,34 +540,34 @@ export default function Home() {
             </div>
           </HoverCard>
 
-          <div className="grid gap-5 md:grid-cols-2">
-          {portfolio.certifications.map((certification, index) => (
-            <HoverCard key={certification.title} delay={index * 0.06} className="rounded-2xl p-5">
-              <div className="flex items-start gap-4">
-                <LogoMark label={certification.logo} />
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-700 dark:text-neon-cyan">{certification.type}</p>
-                  <h3 className="mt-2 text-lg font-semibold">{certification.title}</h3>
-                  <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{certification.issuer}</p>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {portfolio.certifications.map((certification, index) => (
+              <HoverCard key={certification.title} delay={index * 0.06} className="rounded-2xl p-5">
+                <div className="flex items-start gap-4">
+                  <LogoMark label={certification.logo} />
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-700 dark:text-neon-cyan">{certification.type}</p>
+                    <h3 className="mt-2 text-lg font-semibold">{certification.title}</h3>
+                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{certification.issuer}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <span className="rounded-full border border-slate-300/70 px-3 py-1 text-xs font-medium text-slate-600 dark:border-white/15 dark:text-slate-300">{certification.date}</span>
-                <span className="rounded-full border border-cyan-400/35 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-700 dark:text-neon-cyan">{certification.area}</span>
-              </div>
-              {certification.certificate ? (
-                <a
-                  href={certification.certificate}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/60 px-4 py-2 text-sm font-semibold text-cyan-700 transition hover:bg-cyan-400/10 dark:text-neon-cyan"
-                >
-                  <Eye size={16} />
-                  View Certificate
-                </a>
-              ) : null}
-            </HoverCard>
-          ))}
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-slate-300/70 px-3 py-1 text-xs font-medium text-slate-600 dark:border-white/15 dark:text-slate-300">{certification.date}</span>
+                  <span className="rounded-full border border-cyan-400/35 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-700 dark:text-neon-cyan">{certification.area}</span>
+                </div>
+                {certification.certificate ? (
+                  <a
+                    href={certification.certificate}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/60 px-4 py-2 text-sm font-semibold text-cyan-700 transition hover:bg-cyan-400/10 dark:text-neon-cyan"
+                  >
+                    <Eye size={16} />
+                    View Certificate
+                  </a>
+                ) : null}
+              </HoverCard>
+            ))}
           </div>
         </div>
       </Section>
