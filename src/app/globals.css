@@ -85,7 +85,6 @@ body::before {
 
 .hover-card {
   position: relative;
-  overflow: hidden;
 }
 
 .hover-card::after {

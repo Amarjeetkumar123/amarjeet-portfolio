@@ -11,7 +11,6 @@ import {
   Eye,
   ExternalLink,
   GraduationCap,
-  Link,
   Mail,
   Menu,
   MapPin,
@@ -24,6 +23,8 @@ import {
   Trophy,
   X,
 } from "lucide-react";
+import { FaAws, FaDocker, FaGitAlt, FaGithub, FaLinkedinIn, FaNodeJs, FaPython, FaReact } from "react-icons/fa";
+import { SiLeetcode, SiMongodb, SiPostgresql, SiTypescript } from "react-icons/si";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { HoverCard } from "@/components/hover-card";
@@ -143,14 +144,39 @@ function ProfileVisual() {
 function LogoMark({ label }: { label: string }) {
   const isImage = label.startsWith("/");
 
+  const iconMap: Record<string, { icon: React.ReactNode; className: string }> = {
+    FE: {
+      icon: <FaReact size={28} />,
+      className: "text-[#61DAFB]",
+    },
+    BE: {
+      icon: <FaNodeJs size={28} />,
+      className: "text-[#539E43]",
+    },
+    AI: {
+      icon: <FaPython size={28} />,
+      className: "text-[#3776AB]",
+    },
+    DB: {
+      icon: <SiPostgresql size={28} />,
+      className: "text-[#336791]",
+    },
+    DO: {
+      icon: <FaDocker size={28} />,
+      className: "text-[#2496ED]",
+    },
+  };
+
   return (
-    <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white p-2 shadow-sm dark:border-white/15 dark:bg-white">
+    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/15 dark:bg-white/95">
       {isImage ? (
         <img
           src={label}
           alt="logo"
-          className="max-h-full max-w-full object-contain"
+          className="max-h-10 max-w-10 object-contain"
         />
+      ) : iconMap[label] ? (
+        <span className={iconMap[label].className}>{iconMap[label].icon}</span>
       ) : (
         <span className="font-mono text-sm font-bold text-cyan-700">{label}</span>
       )}
@@ -168,6 +194,22 @@ function SkillIcon({ group }: { group: string }) {
   return <Code2 className={className} size={22} />;
 }
 
+function SocialIcon({ label, className = "", size = 18 }: { label: string; className?: string; size?: number }) {
+  if (label === "LinkedIn") {
+    return <FaLinkedinIn className={className} size={size} />;
+  }
+
+  if (label === "GitHub") {
+    return <FaGithub className={className} size={size} />;
+  }
+
+  if (label === "LeetCode") {
+    return <SiLeetcode className={className} size={size} />;
+  }
+
+  return <ExternalLink className={className} size={size} />;
+}
+
 function StickySocials() {
   return (
     <aside className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
@@ -180,7 +222,7 @@ function StickySocials() {
           aria-label={social.label}
           className="grid size-11 place-items-center rounded-full border border-cyan-400/45 bg-white/75 text-cyan-700 shadow-neon backdrop-blur transition hover:-translate-y-1 hover:bg-cyan-400/10 dark:bg-ink/70 dark:text-neon-cyan"
         >
-          {social.label === "LinkedIn" ? <Link size={18} /> : <ExternalLink size={18} />}
+          <SocialIcon label={social.label} size={22} />
         </a>
       ))}
     </aside>
@@ -334,7 +376,7 @@ export default function Home() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
               whileHover={{ y: -5, scale: 1.005 }}
-              className="neon-panel relative ml-10 rounded-2xl p-6"
+              className="neon-panel hover-card relative ml-10 rounded-2xl p-6"
             >
               <span className="absolute -left-[3.1rem] top-6 grid size-10 place-items-center rounded-full border border-cyan-400 bg-ink text-neon-cyan shadow-neon ring-4 ring-cyan-400/10">
                 <BriefcaseBusiness size={17} />
@@ -573,7 +615,7 @@ export default function Home() {
                   rel="noreferrer"
                   className="flex items-center gap-3 rounded-2xl border border-slate-300/70 p-4 transition hover:border-cyan-400 dark:border-white/15"
                 >
-                  {social.label === "LinkedIn" ? <Link className="text-cyan-600 dark:text-neon-cyan" size={19} /> : <ExternalLink className="text-cyan-600 dark:text-neon-cyan" size={19} />}
+                  <SocialIcon label={social.label} className="text-cyan-600 dark:text-neon-cyan" size={22} />
                   <span className="text-sm">{social.label}</span>
                 </a>
               ))}
