@@ -102,6 +102,50 @@ export const portfolio = {
       code: "https://github.com/Amarjeetkumar123/Booklet---a-book-store",
     },
   ],
+  certifications: [
+    {
+      title: "Junior Software Developer",
+      issuer: "nasscom",
+      date: "Nov 2021",
+      certificate: "#",
+    },
+    {
+      title: "Web Developer",
+      issuer: "nasscom",
+      date: "Jun 2023",
+      certificate: "#",
+    },
+    {
+      title: "Software Developer",
+      issuer: "nasscom",
+      date: "Jun 2023",
+      certificate: "#",
+    },
+    {
+      title: "Junior Data Associate",
+      issuer: "nasscom",
+      date: "Jun 2023",
+      certificate: "#",
+    },
+    {
+      title: "C++ Basics",
+      issuer: "Great Learning",
+      date: "Jan 2022",
+      certificate: "#",
+    },
+    {
+      title: "My SQL Basics",
+      issuer: "Great Learning",
+      date: "Jan 2022",
+      certificate: "#",
+    },
+    {
+      title: "Master Data Structures & Algorithms Using C++",
+      issuer: "Coding Blocks",
+      date: "Jun 2022",
+      certificate: "#",
+    },
+  ],
   award: {
     title: "Architect of Intelligence Award",
     issuer: "Pronnel",

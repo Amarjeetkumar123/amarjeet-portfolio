@@ -21,7 +21,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { portfolio } from "@/data/portfolio";
 
-const nav = ["About", "Experience", "Projects", "Skills", "Contact"];
+const nav = ["About", "Experience", "Projects", "Certifications", "Skills", "Contact"];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -335,6 +335,46 @@ export default function Home() {
                 ))}
               </div>
             </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="certifications" eyebrow="Verified Skills" title="Certifications and proof of knowledge from trusted providers.">
+        <div className="grid gap-5 lg:grid-cols-2">
+          {portfolio.certifications.map((certification, index) => (
+            <motion.article
+              key={certification.title}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="neon-panel rounded-2xl p-6"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{certification.issuer}</p>
+                  <h3 className="mt-3 text-xl font-semibold">{certification.title}</h3>
+                </div>
+                <p className="rounded-full border border-slate-300/70 px-3 py-1 text-xs font-medium text-slate-600 dark:border-white/15 dark:text-slate-300">
+                  {certification.date}
+                </p>
+              </div>
+              <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                Verified certification evidence available via Google Drive.
+              </p>
+              {certification.certificate ? (
+                <a
+                  href={certification.certificate}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/60 px-4 py-2 text-sm font-semibold text-cyan-700 transition hover:bg-cyan-400/10 dark:text-neon-cyan"
+                >
+                  <Eye size={16} />
+                  View Certificate
+                </a>
+              ) : null}
+            </motion.article>
           ))}
         </div>
       </Section>
