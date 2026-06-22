@@ -10,22 +10,26 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        ink: "#05070d",
-        neon: {
-          cyan: "#00f5ff",
-          lime: "#b6ff5c",
-          pink: "#ff4ecd",
-          violet: "#8b5cf6",
-        },
-      },
-      boxShadow: {
-        neon: "0 0 24px rgba(0, 245, 255, 0.35)",
-        "neon-lime": "0 0 24px rgba(182, 255, 92, 0.28)",
-      },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "SFMono-Regular", "ui-monospace", "monospace"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+      },
+      colors: {
+        ink: "#0c0c0c",
+        accent: "#a78bfa",
+      },
+      animation: {
+        "fade-up":   "fade-up 0.5s ease both",
+        "ping-slow": "ping-slow 1.5s cubic-bezier(0,0,0.2,1) infinite",
+      },
+      keyframes: {
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(12px)" },
+          to:   { opacity: "1", transform: "translateY(0)" },
+        },
+        "ping-slow": {
+          "75%, 100%": { transform: "scale(1.8)", opacity: "0" },
+        },
       },
     },
   },
