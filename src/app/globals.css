@@ -247,9 +247,9 @@ body {
 
 /* ─── Section label ──────────────────────────────────────────────────────────── */
 .section-label {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--fg-3);
 }

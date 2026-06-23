@@ -48,7 +48,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={`mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:px-10 ${className}`}>
+    <section id={id} className={`mx-auto w-full max-w-7xl px-5 pt-14 pb-14 sm:px-8 lg:px-10 ${className}`}>
       <motion.div
         variants={fadeUp}
         initial="hidden"
