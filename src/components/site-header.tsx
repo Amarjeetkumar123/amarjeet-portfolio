@@ -10,36 +10,85 @@ export function SiteHeader() {
   const [open, setOpen]           = useState(false);
   const [scrolled, setScrolled]   = useState(false);
   const [active, setActive]       = useState("");
+  const [clickedLink, setClickedLink] = useState<string | null>(null);
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     setOpen(false);
+    
     if (targetId === "top") {
+      setActive("");
+      setClickedLink("top");
       window.scrollTo({ top: 0, behavior: "smooth" });
       window.history.pushState(null, "", "#");
+      setTimeout(() => setClickedLink(null), 1000);
       return;
     }
+    
     const el = document.getElementById(targetId);
     if (el) {
+      setClickedLink(targetId);
+      setActive(targetId);
       el.scrollIntoView({ behavior: "smooth" });
       window.history.pushState(null, "", `#${targetId}`);
+      setTimeout(() => setClickedLink(null), 1000);
     }
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+      
+      if (clickedLink) return;
+      
+      // Force "contact" active if scrolled to the absolute bottom of the page
+      const scrollPos = window.innerHeight + window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+      if (scrollPos >= scrollHeight - 100) {
+        setActive("contact");
+      }
+    };
+
+    // Run check immediately to capture current scroll position on mount
+    onScroll();
+
+    // Multiple timeouts to capture asynchronous browser scroll restoration
+    const t1 = setTimeout(onScroll, 100);
+    const t2 = setTimeout(onScroll, 300);
+    const t3 = setTimeout(onScroll, 600);
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [clickedLink]);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); }),
+      (entries) =>
+        entries.forEach((e) => {
+          if (clickedLink) return;
+          
+          if (e.isIntersecting) {
+            const scrollPos = window.innerHeight + window.scrollY;
+            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            // Prevent overriding the bottom scroll contact lock
+            if (scrollPos < scrollHeight - 100) {
+              setActive(e.target.id);
+            }
+          }
+        }),
       { rootMargin: "-40% 0px -55% 0px" }
     );
-    navItems.forEach((n) => { const el = document.getElementById(n.toLowerCase()); if (el) obs.observe(el); });
+    navItems.forEach((n) => {
+      const el = document.getElementById(n.toLowerCase());
+      if (el) obs.observe(el);
+    });
     return () => obs.disconnect();
-  }, []);
+  }, [clickedLink]);
 
   return (
     <header
@@ -56,15 +105,9 @@ export function SiteHeader() {
         <a
           href="#top"
           onClick={(e) => handleScroll(e, "top")}
-          className="flex items-center gap-2.5 font-semibold text-sm text-[var(--fg)]"
+          className="font-semibold text-sm tracking-tight text-[var(--fg)] hover:text-[var(--accent)] transition-colors duration-200"
         >
-          <span
-            className="grid size-7 place-items-center rounded-md text-[11px] font-bold"
-            style={{ background: "var(--accent-dim)", color: "var(--accent)" }}
-          >
-            AK
-          </span>
-          <span className="hidden sm:block">{portfolio.name}</span>
+          {portfolio.name}
         </a>
 
         {/* Desktop nav */}
@@ -76,14 +119,14 @@ export function SiteHeader() {
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 onClick={(e) => handleScroll(e, item.toLowerCase())}
-                className="nav-link relative px-3 py-1.5 rounded-md transition-colors hover:bg-[var(--surface)] hover:text-[var(--fg)]"
-                style={{ color: isActive ? "var(--fg)" : undefined }}
+                className={`nav-link relative px-3 py-1.5 rounded-md transition-all duration-300 ${isActive ? "text-[var(--accent)]" : "text-[var(--fg-3)] hover:text-[var(--accent)] hover:shadow-[0_0_12px_var(--accent-dim)]"}`}
+                style={{ color: isActive ? "var(--accent)" : undefined }}
               >
                 {item}
                 {isActive && (
                   <motion.span
                     layoutId="nav-indicator"
-                    className="absolute inset-0 rounded-md bg-[var(--surface)]"
+                    className="absolute inset-0 rounded-md bg-[var(--accent-dim)] border border-[var(--accent)]/15 shadow-[0_0_12px_var(--accent-dim)]"
                     style={{ zIndex: -1 }}
                     transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
                   />
@@ -122,19 +165,22 @@ export function SiteHeader() {
           className="border-t border-[var(--border)] bg-[var(--nav-bg)] px-5 py-3 backdrop-blur-xl md:hidden"
         >
           <div className="mx-auto max-w-7xl space-y-0.5">
-            {navItems.map((item, i) => (
-              <motion.a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.04 }}
-                onClick={(e) => handleScroll(e, item.toLowerCase())}
-                className="block rounded-md px-3 py-2 text-sm text-[var(--fg-2)] hover:bg-[var(--surface)] hover:text-[var(--fg)]"
-              >
-                {item}
-              </motion.a>
-            ))}
+            {navItems.map((item, i) => {
+              const isActive = active === item.toLowerCase();
+              return (
+                <motion.a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.04 }}
+                  onClick={(e) => handleScroll(e, item.toLowerCase())}
+                  className={`block rounded-md px-3 py-2 text-sm transition-all duration-200 ${isActive ? "text-[var(--accent)] bg-[var(--accent-dim)] font-medium" : "text-[var(--fg-2)] hover:bg-[var(--surface)] hover:text-[var(--accent)]"}`}
+                >
+                  {item}
+                </motion.a>
+              );
+            })}
             <a
               href={portfolio.resume}
               {...getExternalLinkProps(portfolio.resume)}
