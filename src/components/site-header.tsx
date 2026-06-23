@@ -11,6 +11,21 @@ export function SiteHeader() {
   const [scrolled, setScrolled]   = useState(false);
   const [active, setActive]       = useState("");
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setOpen(false);
+    if (targetId === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.pushState(null, "", "#");
+      return;
+    }
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", `#${targetId}`);
+    }
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -38,7 +53,11 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
         {/* Logo */}
-        <a href="#top" className="flex items-center gap-2.5 font-semibold text-sm text-[var(--fg)]">
+        <a
+          href="#top"
+          onClick={(e) => handleScroll(e, "top")}
+          className="flex items-center gap-2.5 font-semibold text-sm text-[var(--fg)]"
+        >
           <span
             className="grid size-7 place-items-center rounded-md text-[11px] font-bold"
             style={{ background: "var(--accent-dim)", color: "var(--accent)" }}
@@ -56,6 +75,7 @@ export function SiteHeader() {
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
+                onClick={(e) => handleScroll(e, item.toLowerCase())}
                 className="nav-link relative px-3 py-1.5 rounded-md transition-colors hover:bg-[var(--surface)] hover:text-[var(--fg)]"
                 style={{ color: isActive ? "var(--fg)" : undefined }}
               >
@@ -109,7 +129,7 @@ export function SiteHeader() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.04 }}
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleScroll(e, item.toLowerCase())}
                 className="block rounded-md px-3 py-2 text-sm text-[var(--fg-2)] hover:bg-[var(--surface)] hover:text-[var(--fg)]"
               >
                 {item}

@@ -45,8 +45,13 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+[id] {
+  scroll-margin-top: 80px;
 }
 
 body {
@@ -278,3 +283,22 @@ body {
 .timeline-dot.active {
   background: var(--accent);
 }
+
+/* ─── Interactive Skill Pills ────────────────────────────────────────────────── */
+.skill-pill {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+}
+
+.skill-pill:not(.dimmed):hover {
+  transform: translateY(-1.5px) scale(1.04);
+  border-color: var(--accent) !important;
+  color: var(--fg) !important;
+  box-shadow: 0 0 16px var(--accent-dim);
+  background: var(--surface);
+}
+
+.skill-pill.dimmed {
+  opacity: 0.25;
+}
+

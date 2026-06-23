@@ -38,9 +38,18 @@ const roles = ["Software Engineer", "Backend Developer", "Full-Stack Developer",
 export function HeroSection() {
   const role = useTyped(roles);
 
+  const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.getElementById("projects");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", "#projects");
+    }
+  };
+
   return (
     <section
-      id="top"
+      id="about"
       className="mx-auto w-full max-w-7xl px-5 pb-12 pt-28 sm:px-8 lg:px-10"
     >
       <motion.div
@@ -96,7 +105,11 @@ export function HeroSection() {
 
         {/* CTAs */}
         <motion.div variants={staggerItem} className="flex flex-wrap items-center gap-2">
-          <a href="#projects" className="btn btn-solid">
+          <a
+            href="#projects"
+            onClick={handleScrollToProjects}
+            className="btn btn-solid"
+          >
             View Projects <ArrowUpRight size={13} />
           </a>
           <a href={portfolio.resume} {...getExternalLinkProps(portfolio.resume)} className="btn btn-outline">
