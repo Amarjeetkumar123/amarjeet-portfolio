@@ -128,21 +128,48 @@ export function SkillsSection() {
           })}
         </motion.div>
 
-        {/* Extra stat row */}
+        {/* Compact Achievement & Competencies Strip */}
         <motion.div variants={staggerItem} className="divider" />
-        <motion.div 
-          variants={staggerItem} 
-          className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[var(--fg-3)]"
+        <motion.div
+          variants={staggerItem}
+          className="flex flex-col lg:flex-row justify-between items-center gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-5 py-3 text-xs text-[var(--fg-3)] transition-all duration-300 hover:border-[var(--border-2)] hover:shadow-md hover:shadow-[var(--accent-dim)]"
         >
-          <span>
-            <span className="font-semibold text-[var(--fg)]">1000+</span> DSA problems solved
-          </span>
-          {portfolio.focusAreas.map((a) => (
-            <span key={a} className="flex items-center gap-1.5">
-              <span className="size-1 rounded-full bg-[var(--border-2)]" />
-              {a}
+          {/* Left: Leetcode Achievements */}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 justify-center lg:justify-start">
+            <span className="pill pill-accent font-semibold select-none text-[10px]">
+              🏆 700+ DSA Solved
             </span>
-          ))}
+            <span className="font-semibold text-[var(--fg-2)]">
+              Rating: 1,448 (Max 1,504)
+            </span>
+            <span className="hidden sm:inline text-[var(--border-2)]">·</span>
+            <span className="font-semibold text-[var(--fg-2)]">
+              Global Rank: 87K+
+            </span>
+            <span className="hidden sm:inline text-[var(--border-2)]">|</span>
+            <a
+              href={portfolio.socials.find((s) => s.label === "LeetCode")?.href || "#"}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[var(--accent)] hover:underline font-semibold flex items-center gap-0.5"
+            >
+              Verify on LeetCode ↗
+            </a>
+          </div>
+
+          {/* Center: Vertical Divider Line */}
+          <div className="hidden lg:block h-5 w-px bg-[var(--accent)] shadow-[0_0_8px_var(--accent)] opacity-80" aria-hidden />
+
+          {/* Right: Core Engineering Focus Areas */}
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 justify-center lg:justify-end text-[var(--fg-2)] font-semibold text-[11px]">
+            <span>Scalable Systems Architecture</span>
+            <span className="size-1 rounded-full bg-[var(--border-2)]" />
+            <span>API Design</span>
+            <span className="size-1 rounded-full bg-[var(--border-2)]" />
+            <span>AI Agent Orchestration</span>
+            <span className="size-1 rounded-full bg-[var(--border-2)]" />
+            <span>Database Optimization</span>
+          </div>
         </motion.div>
       </motion.div>
     </Section>
