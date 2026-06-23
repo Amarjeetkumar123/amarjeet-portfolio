@@ -11,7 +11,7 @@ import { Brain } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
 
 /* ─── Nav Items ──────────────────────────────────────────────────────────────── */
-export const navItems = ["About", "Experience", "Projects", "Skills", "Certifications", "Contact"];
+export const navItems = ["About", "Experience", "Projects", "Skills", "Certifications", "Education", "Contact"];
 
 /* ─── Variants ───────────────────────────────────────────────────────────────── */
 export const fadeUp: Variants = {

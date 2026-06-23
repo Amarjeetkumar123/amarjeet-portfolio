@@ -236,10 +236,27 @@ export const portfolio = {
       "Recognised for engineering innovation at the intersection of backend reliability and AI-powered voice solutions.",
   },
 
-  education: {
-    school: "Ramanujan College, University of Delhi",
-    degree: "B.Voc in Software Development",
-    period: "2020 – 2023",
-    score: "CGPA: 8.0",
-  },
+  education: [
+    {
+      degree: "B.Voc in Software Development",
+      school: "Ramanujan College, University of Delhi",
+      period: "2020 – 2023",
+      score: "CGPA: 8.0",
+      details: "Focus on Data Structures, Algorithms, Backend Systems, and Web Application Development.",
+    },
+    {
+      degree: "12th Standard (PCM)",
+      school: "Dolphin Public School, Ghaziabad, UP",
+      period: "2019",
+      score: "PCM Stream",
+      details: "Completed secondary education with core focus on Physics, Chemistry, and Mathematics.",
+    },
+    {
+      degree: "10th Standard",
+      school: "Jai Hind Public School, Delhi",
+      period: "2017",
+      score: "CBSE Board",
+      details: "Completed primary high school board curriculum.",
+    },
+  ],
 };
