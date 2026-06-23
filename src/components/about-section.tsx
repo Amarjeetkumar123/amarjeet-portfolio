@@ -6,7 +6,7 @@ import { portfolio } from "@/data/portfolio";
 
 export function AboutSection() {
   return (
-    <section id="about" className="mx-auto w-full max-w-6xl px-5 pb-10 pt-2 sm:px-8 lg:px-10">
+    <section id="about" className="mx-auto w-full max-w-7xl px-5 pb-10 pt-2 sm:px-8 lg:px-10">
       <motion.div
         variants={staggerContainer}
         initial="hidden"

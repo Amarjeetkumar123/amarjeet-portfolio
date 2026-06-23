@@ -25,17 +25,17 @@ export function ProjectsSection() {
               {/* Left */}
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-sm font-semibold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
+                  <h3 className="text-base font-semibold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
                     {project.name}
                   </h3>
                   <span className="pill text-[10px]">{project.type}</span>
                 </div>
-                <p className="mt-1.5 text-xs leading-6 text-[var(--fg-2)]">{project.description}</p>
+                <p className="mt-1.5 text-sm leading-6 text-[var(--fg-2)]">{project.description}</p>
 
                 {/* Highlights */}
                 <ul className="mt-2 space-y-1">
                   {project.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2 text-[11px] text-[var(--fg-3)]">
+                    <li key={h} className="flex items-start gap-2 text-xs text-[var(--fg-3)]">
                       <span className="mt-1.5 size-1 shrink-0 rounded-full bg-[var(--border-2)]" />
                       {h}
                     </li>

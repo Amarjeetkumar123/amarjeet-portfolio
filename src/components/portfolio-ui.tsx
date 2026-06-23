@@ -1,12 +1,13 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion, type Variants } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { ExternalLink, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedinIn, FaNodeJs, FaPython, FaReact } from "react-icons/fa";
-import { SiLeetcode } from "react-icons/si";
+import { FaGithub, FaLinkedinIn, FaNodeJs, FaPython, FaReact, FaDocker, FaAws } from "react-icons/fa";
+import { SiLeetcode, SiNextdotjs, SiMongodb, SiExpress } from "react-icons/si";
+import { Brain } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
 
 /* ─── Nav Items ──────────────────────────────────────────────────────────────── */
@@ -47,7 +48,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={`mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 lg:px-10 ${className}`}>
+    <section id={id} className={`mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:px-10 ${className}`}>
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -97,37 +98,73 @@ export function ThemeToggle() {
 /* ─── Profile Photo ──────────────────────────────────────────────────────────── */
 export function ProfilePhoto({ size = 88 }: { size?: number }) {
   const [ok, setOk] = useState(Boolean(portfolio.image));
+  const [zoomed, setZoomed] = useState(false);
 
   return (
-    <div
-      className="relative shrink-0 overflow-hidden rounded-full border border-[var(--border-2)]"
-      style={{ width: size, height: size }}
-    >
-      {portfolio.image && ok ? (
-        <img
-          src={portfolio.image}
-          alt={portfolio.name}
-          className="h-full w-full object-cover"
-          onError={() => setOk(false)}
-        />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center bg-[var(--surface)] font-semibold text-[var(--fg-3)]">
-          AK
-        </div>
-      )}
-    </div>
+    <>
+      <div
+        onClick={() => { if (portfolio.image && ok) setZoomed(true); }}
+        className={`relative shrink-0 overflow-hidden rounded-full border border-[var(--border-2)] ${portfolio.image && ok ? "cursor-zoom-in transition-transform hover:scale-105" : ""}`}
+        style={{ width: size, height: size }}
+      >
+        {portfolio.image && ok ? (
+          <img
+            src={portfolio.image}
+            alt={portfolio.name}
+            className="h-full w-full object-cover"
+            onError={() => setOk(false)}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-[var(--surface)] font-semibold text-[var(--fg-3)]">
+            AK
+          </div>
+        )}
+      </div>
+
+      <AnimatePresence>
+        {zoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setZoomed(false)}
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/85 p-4 backdrop-blur-md cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 10 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="relative max-w-[90vw] max-h-[90vh] flex flex-col items-center gap-3"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={portfolio.image}
+                alt={portfolio.name}
+                className="max-w-full max-h-[80vh] rounded-2xl border border-white/10 shadow-2xl object-contain bg-[#121212]"
+              />
+              <p className="text-[11px] font-mono text-white/50">Click anywhere to close</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
 /* ─── Floating tech badges for hero ─────────────────────────────────────────── */
 export function HeroTechRow() {
   const techs = [
-    { icon: <FaNodeJs size={14} />, label: "Node.js",  color: "#539E43" },
-    { icon: <FaPython size={14} />, label: "Python",   color: "#3776AB" },
-    { icon: <FaReact  size={14} />, label: "React",    color: "#61DAFB" },
+    { icon: <FaNodeJs size={13} />, label: "Node.js",  color: "#539E43" },
+    { icon: <SiExpress size={13} />, label: "Express",  color: "#828282" },
+    { icon: <FaReact  size={13} />, label: "React",    color: "#61DAFB" },
+    { icon: <SiMongodb size={13} />, label: "MongoDB", color: "#47A248" },
+    { icon: <Brain size={13} />, label: "AI & LLMs", color: "#EC4899" },
+    { icon: <FaPython size={13} />, label: "Python",   color: "#3776AB" },
+    { icon: <FaAws size={13} />, label: "AWS",      color: "#FF9900" },
   ];
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {techs.map((t) => (
         <span
           key={t.label}

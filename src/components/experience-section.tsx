@@ -35,16 +35,16 @@ export function ExperienceSection() {
               <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-semibold text-[var(--fg)]">{job.role}</h3>
+                    <h3 className="text-base font-semibold text-[var(--fg)]">{job.role}</h3>
                     {i === 0 && (
                       <span className="pill pill-accent text-[10px]">Current</span>
                     )}
                   </div>
-                  <p className="mt-0.5 text-xs text-[var(--fg-2)]">{job.company}</p>
+                  <p className="mt-0.5 text-sm text-[var(--fg-2)]">{job.company}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-mono text-[11px] text-[var(--fg-3)]">{job.period}</p>
-                  <p className="mt-0.5 flex items-center justify-end gap-1 font-mono text-[11px] text-[var(--fg-3)]">
+                  <p className="font-mono text-xs text-[var(--fg-3)]">{job.period}</p>
+                  <p className="mt-0.5 flex items-center justify-end gap-1 font-mono text-xs text-[var(--fg-3)]">
                     <MapPin size={10} /> {job.location}
                   </p>
                 </div>
@@ -53,7 +53,7 @@ export function ExperienceSection() {
               {/* Bullet points */}
               <ul className="mt-3 space-y-2">
                 {job.points.map((pt) => (
-                  <li key={pt} className="flex items-start gap-2.5 text-xs leading-6 text-[var(--fg-2)]">
+                  <li key={pt} className="flex items-start gap-2.5 text-sm leading-6 text-[var(--fg-2)]">
                     <span className="mt-2 size-1 shrink-0 rounded-full bg-[var(--border-2)]" />
                     {pt}
                   </li>

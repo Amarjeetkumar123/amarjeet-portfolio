@@ -12,7 +12,7 @@ function useTyped(words: string[], speed = 80, pause = 2200) {
   const [wIdx, setWIdx]       = useState(0);
   const [cIdx, setCIdx]       = useState(0);
   const [del, setDel]         = useState(false);
-  const t = useRef<ReturnType<typeof setTimeout>>();
+  const t = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const word = words[wIdx];
@@ -41,7 +41,7 @@ export function HeroSection() {
   return (
     <section
       id="top"
-      className="mx-auto w-full max-w-6xl px-5 pb-12 pt-28 sm:px-8 lg:px-10"
+      className="mx-auto w-full max-w-7xl px-5 pb-12 pt-28 sm:px-8 lg:px-10"
     >
       <motion.div
         initial="hidden"
@@ -50,11 +50,11 @@ export function HeroSection() {
         className="flex flex-col gap-5"
       >
         {/* Top row: photo + name + status */}
-        <motion.div variants={staggerItem} className="flex items-center gap-4">
-          <ProfilePhoto size={56} />
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-base font-semibold text-[var(--fg)]">{portfolio.name}</h1>
+        <motion.div variants={staggerItem} className="flex items-center gap-5">
+          <ProfilePhoto size={96} />
+          <div className="space-y-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="text-xl font-bold text-[var(--fg)]">{portfolio.name}</h1>
               {/* Available badge */}
               <span className="flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[10px] text-[var(--fg-3)]">
                 <span className="ping-dot relative flex size-1.5">
@@ -64,7 +64,7 @@ export function HeroSection() {
                 Open to work
               </span>
             </div>
-            <p className="mt-0.5 flex items-center gap-1.5 text-xs text-[var(--fg-3)]">
+            <p className="flex items-center gap-1.5 text-xs text-[var(--fg-3)]">
               <MapPin size={11} />
               {portfolio.location}
             </p>
@@ -73,16 +73,18 @@ export function HeroSection() {
 
         {/* Headline */}
         <motion.div variants={staggerItem}>
-          <h2 className="heading-xl">
-            {portfolio.headline.split(",").slice(0, 1)}
+          <h2 className="text-xl font-semibold tracking-tight text-[var(--fg)] sm:text-2xl md:text-3xl lg:text-4xl lg:whitespace-nowrap">
+            {portfolio.headline}
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--fg-2)]">
-            {portfolio.intro}
-          </p>
+          <div className="mt-3.5 max-w-5xl space-y-3 text-[15px] leading-7 text-[var(--fg-2)]">
+            {portfolio.intro.split("\n\n").map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
         </motion.div>
 
         {/* Typed role */}
-        <motion.p variants={staggerItem} className="font-mono text-xs text-[var(--fg-3)]">
+        <motion.p variants={staggerItem} className="font-mono text-sm text-[var(--fg-3)]">
           <span style={{ color: "var(--accent)" }}>~/</span> {role}
           <span className="cursor" />
         </motion.p>

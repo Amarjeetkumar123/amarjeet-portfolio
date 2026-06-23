@@ -20,9 +20,9 @@ export function CertificationsSection() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="section-label mb-1">Featured Award</p>
-              <h3 className="text-sm font-semibold text-[var(--fg)]">{portfolio.award.title}</h3>
-              <p className="mt-0.5 text-xs text-[var(--fg-2)]">{portfolio.award.issuer} · {portfolio.award.area}</p>
-              <p className="mt-2 text-xs leading-6 text-[var(--fg-3)]">{portfolio.award.description}</p>
+              <h3 className="text-base font-semibold text-[var(--fg)]">{portfolio.award.title}</h3>
+              <p className="mt-0.5 text-sm text-[var(--fg-2)]">{portfolio.award.issuer} · {portfolio.award.area}</p>
+              <p className="mt-2 text-sm leading-6 text-[var(--fg-3)]">{portfolio.award.description}</p>
             </div>
             {portfolio.award.certificate && portfolio.award.certificate !== "#" && (
               <a
@@ -46,8 +46,8 @@ export function CertificationsSection() {
               className="flex items-center justify-between gap-4 py-3.5"
             >
               <div className="min-w-0">
-                <p className="truncate text-xs font-medium text-[var(--fg)]">{cert.title}</p>
-                <p className="mt-0.5 text-[11px] text-[var(--fg-3)]">
+                <p className="truncate text-sm font-medium text-[var(--fg)]">{cert.title}</p>
+                <p className="mt-0.5 text-xs text-[var(--fg-3)]">
                   {cert.issuer} · {cert.area} · {cert.date}
                 </p>
               </div>

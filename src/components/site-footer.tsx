@@ -2,7 +2,7 @@ import { portfolio } from "@/data/portfolio";
 
 export function SiteFooter() {
   return (
-    <footer className="mx-auto w-full max-w-6xl px-5 py-8 sm:px-8 lg:px-10">
+    <footer className="mx-auto w-full max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
       <div className="divider mb-6" />
       <div className="flex flex-col gap-3 text-xs text-[var(--fg-3)] sm:flex-row sm:items-center sm:justify-between">
         <p>

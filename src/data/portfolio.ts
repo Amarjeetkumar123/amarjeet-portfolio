@@ -8,10 +8,10 @@ export const portfolio = {
   resume: "https://drive.google.com/file/d/1kNv9CI2mFfjPhyPWIXSxQLo6sINz8TjX/view?usp=drivesdk",
 
   headline:
-    "Software Engineer building scalable backend systems, full-stack products, and AI-powered solutions.",
+    "Software Engineer crafting scalable web applications & AI-powered solutions",
 
   intro:
-    "I design and ship production-grade backend services, full-stack web applications, and AI-integrated systems. My stack spans Node.js, Python, React, Next.js, MongoDB, PostgreSQL, Docker, AWS, and LLM orchestration with LangChain, RAG pipelines, and prompt engineering. I focus on clean architecture, performance at scale, and practical solutions that move business outcomes.",
+    "I build full-stack web applications, production-grade backend services, and AI-integrated systems that solve real business problems. From frontend to infrastructure to intelligent features, I focus on clean architecture and code that performs under real-world load — not just demos.\n\nWhether it's shipping a polished UI, designing an API that scales, optimizing a slow query, or wiring up an LLM pipeline that actually adds value, I care about outcomes the business can measure.",
 
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/amarjeet-kumar-638782208/" },

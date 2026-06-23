@@ -54,8 +54,8 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.65;
   transition: background 200ms, color 200ms;
   overflow-x: hidden;
 }
@@ -195,7 +195,7 @@ body {
   gap: 0.375rem;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 180ms ease;
@@ -242,7 +242,7 @@ body {
 
 /* ─── Section label ──────────────────────────────────────────────────────────── */
 .section-label {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;

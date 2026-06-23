@@ -17,7 +17,7 @@ export function ContactSection() {
       >
         {/* Short pitch */}
         <motion.div variants={staggerItem}>
-          <p className="text-sm leading-7 text-[var(--fg-2)]">
+          <p className="text-base leading-7 text-[var(--fg-2)]">
             I&apos;m open to backend, full-stack, and AI-focused roles. I bring strong product ownership, reliable backend engineering, and practical AI integration. Let&apos;s build something great.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -46,7 +46,7 @@ export function ContactSection() {
               key={item.label}
               href={item.href}
               {...(item.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
-              className="flex items-center gap-3 bg-[var(--surface)] px-4 py-3.5 text-xs text-[var(--fg-2)] transition-colors hover:bg-[var(--bg-2)] hover:text-[var(--fg)]"
+              className="flex items-center gap-3 bg-[var(--surface)] px-4 py-3.5 text-sm text-[var(--fg-2)] transition-colors hover:bg-[var(--bg-2)] hover:text-[var(--fg)]"
             >
               <span className="text-[var(--fg-3)]">{item.icon}</span>
               <span className="truncate">{item.value}</span>
@@ -58,9 +58,9 @@ export function ContactSection() {
         <motion.div variants={staggerItem} className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
           <GraduationCap size={16} className="mt-0.5 shrink-0 text-[var(--fg-3)]" />
           <div>
-            <p className="text-xs font-semibold text-[var(--fg)]">{portfolio.education.degree}</p>
-            <p className="mt-0.5 text-[11px] text-[var(--fg-3)]">{portfolio.education.school}</p>
-            <p className="mt-0.5 font-mono text-[11px] text-[var(--fg-3)]">
+            <p className="text-sm font-semibold text-[var(--fg)]">{portfolio.education.degree}</p>
+            <p className="mt-0.5 text-xs text-[var(--fg-3)]">{portfolio.education.school}</p>
+            <p className="mt-0.5 font-mono text-xs text-[var(--fg-3)]">
               {portfolio.education.period} · {portfolio.education.score}
             </p>
           </div>

@@ -22,7 +22,7 @@ export function SkillsSection() {
           >
             {/* Category label */}
             <div className="w-32 shrink-0 pt-0.5">
-              <p className="text-[11px] font-medium text-[var(--fg-3)]">{group.group}</p>
+              <p className="text-xs font-medium text-[var(--fg-3)]">{group.group}</p>
             </div>
 
             {/* Tag cloud */}
@@ -36,7 +36,7 @@ export function SkillsSection() {
 
         {/* Extra stat row */}
         <motion.div variants={staggerItem} className="divider" />
-        <motion.div variants={staggerItem} className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[var(--fg-3)]">
+        <motion.div variants={staggerItem} className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[var(--fg-3)]">
           <span>
             <span className="font-semibold text-[var(--fg)]">1000+</span> DSA problems solved
           </span>
