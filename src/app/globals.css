@@ -357,4 +357,52 @@ body {
   100% { transform: scale(1.45); opacity: 0; }
 }
 
+/* ─── Certifications Timeline Nodes ─────────────────────────────────────────── */
+.timeline-logo-node {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 0 2px var(--bg);
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.group:hover .timeline-logo-node {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 8px var(--accent-dim);
+  transform: scale(1.1);
+}
+
+.timeline-trophy-node {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 0 2px var(--bg);
+  color: var(--accent);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.group:hover .timeline-trophy-node {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 12px var(--accent-dim);
+  transform: scale(1.15) rotate(5deg);
+  background: var(--surface);
+}
+
+
 
