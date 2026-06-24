@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ArrowUpRight, BookOpen, Car, ChevronLeft, ChevronRight, Code2, Pause, Play } from "lucide-react";
 import { getExternalLinkProps, Section } from "@/components/portfolio-ui";
 import { portfolio } from "@/data/portfolio";
@@ -152,7 +152,7 @@ export function ProjectsSection() {
   const currentProject = projects[activeIndex];
 
   // Framer Motion slide variants
-  const slideVariants = {
+  const slideVariants: Variants = {
     enter: (dir: number) => ({
       x: dir > 0 ? 50 : -50,
       opacity: 0,

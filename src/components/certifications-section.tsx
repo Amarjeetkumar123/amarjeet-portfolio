@@ -5,9 +5,20 @@ import { Trophy } from "lucide-react";
 import { Section, staggerContainer, staggerItem } from "@/components/portfolio-ui";
 import { portfolio } from "@/data/portfolio";
 
+interface Achievement {
+  isAward: boolean;
+  title: string;
+  issuer: string;
+  area: string;
+  date: string;
+  description?: string;
+  certificate?: string;
+  logo?: string;
+}
+
 export function CertificationsSection() {
   // Combine award and certifications into a single list
-  const achievements = [
+  const achievements: Achievement[] = [
     {
       isAward: true,
       title: portfolio.award.title,
