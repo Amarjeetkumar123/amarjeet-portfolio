@@ -82,7 +82,7 @@ export function HeroSection() {
 
         {/* Headline */}
         <motion.div variants={staggerItem}>
-          <h2 className="text-xl font-semibold tracking-tight text-[var(--fg)] sm:text-2xl md:text-3xl lg:text-4xl lg:whitespace-nowrap">
+          <h2 className="text-xl font-semibold tracking-tight text-[var(--fg)] sm:text-2xl md:text-3xl lg:text-4xl">
             {portfolio.headline}
           </h2>
           <div className="mt-3.5 max-w-5xl space-y-3 text-[15px] leading-7 text-[var(--fg-2)]">

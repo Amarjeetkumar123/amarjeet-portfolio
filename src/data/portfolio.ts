@@ -5,7 +5,7 @@ export const portfolio = {
   email: "amarjeet.official.work@gmail.com",
   phone: "+91 8920843853",
   image: "/amarjeet_profile.png",
-  resume: "https://drive.google.com/file/d/1kNv9CI2mFfjPhyPWIXSxQLo6sINz8TjX/view?usp=drivesdk",
+  resume: "https://drive.google.com/file/d/1WpFfYYh4ElDEP-jJmnN8PW-zHlwsnSD1/view?usp=sharing",
 
   headline:
     "Software Engineer crafting scalable web applications & AI-powered solutions",
@@ -15,14 +15,14 @@ export const portfolio = {
 
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/amarjeet-kumar-638782208/" },
-    { label: "GitHub",   href: "https://github.com/Amarjeetkumar123" },
+    { label: "GitHub", href: "https://github.com/Amarjeetkumar123" },
     { label: "LeetCode", href: "https://leetcode.com/u/amarjeet_kumar0987/" },
   ],
 
   metrics: [
-    { value: "70%",   label: "support calls automated" },
-    { value: "35%",   label: "AI accuracy improvement" },
-    { value: "10K+",  label: "automations processed daily" },
+    { value: "70%", label: "support calls automated" },
+    { value: "35%", label: "AI accuracy improvement" },
+    { value: "10K+", label: "automations processed daily" },
     { value: "1000+", label: "active users supported" },
   ],
 
