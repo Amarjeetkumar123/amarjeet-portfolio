@@ -100,7 +100,7 @@ export function SiteHeader() {
         borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
       }}
     >
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5 sm:px-8 lg:px-10">
         {/* Logo */}
         <a
           href="#top"
@@ -164,7 +164,7 @@ export function SiteHeader() {
           transition={{ duration: 0.2 }}
           className="border-t border-[var(--border)] bg-[var(--nav-bg)] px-5 py-3 backdrop-blur-xl md:hidden"
         >
-          <div className="mx-auto max-w-7xl space-y-0.5">
+          <div className="mx-auto max-w-6xl space-y-0.5">
             {navItems.map((item, i) => {
               const isActive = active === item.toLowerCase();
               return (

@@ -36,7 +36,7 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="mx-auto w-full max-w-7xl px-5 py-5 sm:px-8 lg:px-10 mt-12 border-t border-[var(--border)]/40 text-xs text-[var(--fg-3)]">
+    <footer className="mx-auto w-full max-w-6xl px-5 py-5 sm:px-8 lg:px-10 mt-12 border-t border-[var(--border)]/40 text-xs text-[var(--fg-3)]">
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Left: Copyright */}
         <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-center md:text-left">

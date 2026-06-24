@@ -50,7 +50,7 @@ export function HeroSection() {
   return (
     <section
       id="about"
-      className="mx-auto w-full max-w-7xl px-5 pb-12 pt-28 sm:px-8 lg:px-10"
+      className="mx-auto w-full max-w-6xl px-5 pb-12 pt-28 sm:px-8 lg:px-10"
     >
       <motion.div
         initial="hidden"
